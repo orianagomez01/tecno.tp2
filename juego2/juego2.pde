@@ -19,10 +19,23 @@ int alto = 100;
 //declaro un ArrayList de objetos contorno
 //ArrayList<Contour> contornos;
 
+//TIEMPO
+int interval;
+
+int startTime;
+int endTime;
+
 void setup () {
   size (1200, 600);
-  
-    smooth();
+
+  smooth();
+
+  startTime= millis();
+
+  //intervalo de segundos, en este caso seria un segundo
+  interval = 800;
+
+  println ("startTime" + startTime);
 
   //CAMARA
   //devuelve la lista de camaras disponibles
@@ -40,8 +53,8 @@ void setup () {
 
   //iniciar Fisica
   Fisica.init(this);
-  
-   //inicio el mundo
+
+  //inicio el mundo
   mundo = new FWorld();
 
   mundo.setGravity(0, 0);
@@ -53,33 +66,23 @@ void setup () {
   globo = new Globo(90, 200);
 
   //comenzar las posiciones de x e y del globo
-  globo.inicializar();
   mundo.add (globo);
-
-  //obstaculos de avioneta
-  //agregarObstaculos( mundo, "R.jpg", "Avioneta" );
 
   //otro obstaculo de pajaros
   // agregarObstaculos( mundo, "R.png", "Pajaro" );
 
-//agregar la lluvia
-//agregarLluvia();
-
-  //FBox pared1 = new FBox(10, 300);
-  //pared1.setFill(0);
-  //pared1.setPosition( 1000, random(150, 450) );
-  //pared1.setStatic(true);
-  //mundo.add( pared1 );
 
   //} else {
   //println("intentar otra vez Camara no encontrada");
   //exit();
   //}
-
 }
 
 void draw () {
-  //frameRate(15);
+  endTime= millis();
+
+  println ("end time: " + endTime);
+
   //CAMARA
   //int umbral = int( map( 1100, 0, width, 0, 256 ) );
   fill(100);
@@ -115,15 +118,49 @@ void draw () {
   // background (255);
 
   //dibujo el mundo con el juego
+  background(0);
+  //text (int(startTime+1), 20, 20);
 
-  if (frameCount % 24 == 0) {
+  globo.inicializar(300, mouseY);
+
+  if (startTime >= 100 && endTime % 150 == 0) {
+    //comienza el juego
+    agregarObstaculos( mundo, "R.jpg", "Avioneta" );
+
+    println ("comienza juego");
+  }
+
+  if (endTime - startTime >= interval) {
     agregarLluvia();
+    //agregarCajas();
+
+    println("Timer triggered!");
+
+    //resetear el inicio del tiempo
+    startTime = millis();
+
+    println ("reinicio startTime:" + startTime);
   }
-  if (frameCount % 100 == 0 && frameCount < 1000) {
-      agregarObstaculos( mundo, "R.jpg", "Avioneta" );
+
+//el primero indica el tiempo en millis y lo otro seria la frecuencia
+  if (startTime >= 2400 && endTime % 150 == 0) {
+    agregarCajas();
+
+    println("box");
   }
-  
+
+  //if (frameCount % 24 == 0) {
+  //  agregarLluvia();
+  //  agregarCajas();
+  //}
+
+  //if (frameCount % 100 == 0 && frameCount < 1000) {
+  //    agregarObstaculos( mundo, "R.jpg", "Avioneta" );
+  //}
+
+
   mundo.step();
   mundo.draw(this);
+
 }
 //}

@@ -8,11 +8,11 @@ class Globo extends FBox {
   }
 
   //inicializamos como comienza el personaje en el juego
-  void inicializar()
+  void inicializar(float _x, float _y)
   {
 pushMatrix();
     setName("personaje");
-    setPosition( xOriginal, mouseY );
+    setPosition( _x, _y );
     setDamping(0);
     setRestitution(0);
     setFriction(0);
