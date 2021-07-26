@@ -2,6 +2,7 @@ import fisica.*;
 
 FWorld mundo;
 Globo globo;
+Fondo f;
 
 //importo la libreria de OpenCV
 import gab.opencv.*;
@@ -68,9 +69,12 @@ void setup () {
   //comenzar las posiciones de x e y del globo
   mundo.add (globo);
 
+
   //otro obstaculo de pajaros
   // agregarObstaculos( mundo, "R.png", "Pajaro" );
 
+  //agregar fondo para inicializarlo
+  f= new Fondo();
 
   //} else {
   //println("intentar otra vez Camara no encontrada");
@@ -119,35 +123,35 @@ void draw () {
 
   //dibujo el mundo con el juego
   background(0);
-  //text (int(startTime+1), 20, 20);
 
   globo.inicializar(300, mouseY);
+  f.inicializar();
 
-  if (startTime >= 100 && endTime % 150 == 0) {
-    //comienza el juego
-    agregarObstaculos( mundo, "R.jpg", "Avioneta" );
+    if (startTime >= 100 && endTime % 150 == 0) {
+      //comienza el juego
+      agregarObstaculos( mundo, "R.jpg", "Avioneta" );
 
-    println ("comienza juego");
-  }
+      println ("comienza juego");
+    }
 
-  if (endTime - startTime >= interval) {
-    agregarLluvia();
-    //agregarCajas();
+    if (endTime - startTime >= interval) {
+      agregarLluvia();
+      //agregarCajas();
 
-    println("Timer triggered!");
+      println("Timer triggered!");
 
-    //resetear el inicio del tiempo
-    startTime = millis();
+      //resetear el inicio del tiempo
+      startTime = millis();
 
-    println ("reinicio startTime:" + startTime);
-  }
+      println ("reinicio startTime:" + startTime);
+    }
 
-//el primero indica el tiempo en millis y lo otro seria la frecuencia
-  if (startTime >= 2400 && endTime % 150 == 0) {
-    agregarCajas();
+  //el primero indica el tiempo en millis y lo otro seria la frecuencia
+    if (startTime >= 2400 && endTime % 150 == 0) {
+      agregarCajas();
 
-    println("box");
-  }
+      println("box");
+    }
 
   //if (frameCount % 24 == 0) {
   //  agregarLluvia();
@@ -161,6 +165,5 @@ void draw () {
 
   mundo.step();
   mundo.draw(this);
-
 }
 //}

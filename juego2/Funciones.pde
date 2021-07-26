@@ -40,7 +40,7 @@ void agregarLluvia() {
   
   pushMatrix();
   int ballCount = 5;
-  float bv= 500;
+  float bv= 400;
   
     for (int i=0; i<ballCount; i++) {
     FCircle bolita = new FCircle(15);
@@ -105,4 +105,10 @@ void agregarLluvia() {
   
   popMatrix();
    }
+   
+  void crearFuego () {
+     
+   
+  }
+   
    
