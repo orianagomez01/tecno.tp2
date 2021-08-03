@@ -7,7 +7,7 @@ Globo globo;
 Avioneta a;
 Lluvia lluvia;
 Cajas cajas;
-Fuego fuego;
+ArrayList <Fuego> fuego;
 
 //-----------
 int tiempo =1;
@@ -16,8 +16,8 @@ boolean resultado;
 
 void setup () {
   size (1200, 600);
-  
-    smooth();
+
+  smooth();
 
 
   //iniciar Fisica
@@ -45,8 +45,19 @@ void setup () {
   cajas = new Cajas (60, 60);
   mundo.add (cajas);
 
-  fuego = new Fuego (120, 60);
-  mundo.add (fuego);
+
+  fuego = new ArrayList <Fuego> ();
+  for (int i = 0; i < 8; i++)
+  {
+    Fuego p1 = new Fuego(140, 160);
+    //el i * 145 es el acercamiento entre los box y el + 100 la posición en X
+    //height es q ocupe todo el ancho y el - 80 la posicion en y 
+    p1.iniciarFuego(i* 145 + 100, height - 80 - (i * 0));
+    p1.setName ("fuego-plataforma");
+    mundo.add(p1);
+    fuego.add(p1);
+  }
+
 }
 
 void draw () {
@@ -64,18 +75,17 @@ void draw () {
     //comienza el juego
     globo.inicializar();
     f.inicializar();
-     
+
     float m = map (tiempo, 0, 1500, height/20, width/2-370); 
     tiempo = tiempo +1;
     noStroke();
     rect (width/2+350, 20, m, height/24); 
-     
+
     // fill(0);
     //text ("Tiempo:", 10, 20);
     //tiempo=tiempo+1;
     //text(tiempo, 70, 20);
     //noFill();
-    
   }
   if (estado==3) {
     //pierde por colision
@@ -84,6 +94,7 @@ void draw () {
     mundo.remove(a);
     mundo.remove (lluvia);
     mundo.remove(cajas);
+    
     //aca iria el remove del obstaculo para que se borre ni bien sucede la colision
     text("No llegaste a destino!", 200, 200);
     //  stop();
@@ -102,8 +113,7 @@ void draw () {
 
   if (tiempo >= 200) {
     a.inicializar();
-    //agregarObstaculos( mundo, "R.jpg", "Avioneta" );
-    // startTime = tiempo;
+
     println ("comienza juego");
     // }
   }
@@ -118,7 +128,7 @@ void draw () {
   //el primero indica el tiempo en millis y lo otro seria la frecuencia
   if (tiempo >= 640) {
     if ( frameCount % 300 == 0) {
-      //cajas.inicializar();
+      cajas.inicializar();
     }
   }
   if (tiempo >=1500) {
@@ -129,7 +139,7 @@ void draw () {
   //  Globo wind = new Globo(0, -40);
   //  globo.applyForce(wind);
   //}
-  
+
   mundo.step();
   mundo.draw(this);
 }
@@ -176,11 +186,21 @@ boolean hayColisionEntre( FContact contact, String nombreUno, String nombreDos )
 void contactLluvia( FContact colision ) {
   if ( hayColisionEntre( colision, "personaje", "lluvia" ) ) {
     resultado = false;
-    
   }
 }
 void contactCajas( FContact colision ) {
   if ( hayColisionEntre( colision, "personaje", "cajas" ) ) {
     resultado = false;
   }
+}
+
+void contactFuego (FContact colision) {
+  
+  if ( hayColisionEntre( colision, "personaje", "fuego-plataforma" ) ) {
+    FBody uno = colision.getBody1();
+    FBody dos = colision.getBody2();
+    mundo.remove( uno );
+    mundo.remove( dos );
+  }
+  
 }

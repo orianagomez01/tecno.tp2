@@ -21,6 +21,7 @@ class Cajas extends FBox {
     setVelocity(cajas.getVelocityX(), cv);
     setName("Cajas");
     setRotatable(false);
+    setGrabbable (false);
 
     //rebote
     setRestitution(0);

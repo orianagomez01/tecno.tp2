@@ -4,12 +4,12 @@ class Fuego extends FBox {
     super (x_, y_);
   }
 
-  void iniciarFuego () {
-    setPosition (width, height-100);
-    setName ("lluvia");
+  void iniciarFuego (float _x, float _y) {
+    setPosition (_x, _y);
+    setName ("fuego");
     setStatic (true);
-
-
+    setGrabbable (false);
+    
     //poner foto del gif del fuego
     //attachImage();
   }

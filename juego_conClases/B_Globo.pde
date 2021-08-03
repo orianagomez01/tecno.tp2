@@ -11,19 +11,19 @@ class Globo extends FBox {
   {
     setName("personaje");
     setPosition( xOriginal, mouseY );
-    setDamping(0);
-    setRestitution(0);
+    //setDamping(0);
+    //setRestitution(0);
     setFriction(1);
     setRotatable(false);
     setStatic(false);
+    setGrabbable (false);
+
     setDensity(0);
 
     //es para agregar la imagen dentro del rect  
     //attachImage();
 
     //  popMatrix();
-    
-
   }
 
   //void applyForce (Globo force) {

@@ -5,7 +5,7 @@ class Lluvia extends FCircle {
   }
 
   void inicializarLluvia () {
-    int ballCount = 55;
+    int ballCount = 105;
     float bv= 800;
 
     for (int i=0; i<ballCount; i++) {
@@ -14,10 +14,12 @@ class Lluvia extends FCircle {
       setFill(0, 0, 255);
       //acomodar posicion de random cuando se coloque en el juego
       setPosition(random(width), -2);
-      setDensity(1000);
+      //setDensity(1000);
       //addForce(500, bf);
-      setVelocity( getVelocityX(), bv );
+      setVelocity( getVelocityY(), bv );
       setRotatable(false);
+          setGrabbable (false);
+
       setName ("lluvia");
       //rebote
       setRestitution(0);
