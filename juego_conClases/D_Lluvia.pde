@@ -6,8 +6,7 @@ class Lluvia extends FCircle {
 
   void inicializarLluvia () {
     int ballCount = 15;
-    float bv= 400;
-
+    float bv= 800;
 
     for (int i=0; i<ballCount; i++) {
       //float bf= map(i, 0, ballCount, 1000, 2000);
@@ -19,22 +18,18 @@ class Lluvia extends FCircle {
       //addForce(500, bf);
       setVelocity( getVelocityX(), bv );
       setRotatable(false);
+      setName ("lluvia");
       //rebote
       setRestitution(0);
 
       float fy = -600;
-      addForce ( getForceX(), fy );
+      addForce ( fy, getForceX());
 
 
       //poner foto de la lluvia
       //bolita.attachImage();
 
-      if (resultado == true) {
-        mundo.remove(lluvia);
-      }
-      if (estado==4) {
-        mundo.remove(lluvia);
-      }
+     
     }
   }
 }

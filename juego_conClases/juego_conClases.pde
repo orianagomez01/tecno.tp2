@@ -62,6 +62,9 @@ void draw () {
     //pierde por colision
     background(0);
     mundo.remove(globo);
+    mundo.remove(a);
+    mundo.remove (lluvia);
+    mundo.remove(cajas);
     //aca iria el remove del obstaculo para que se borre ni bien sucede la colision
     text("No llegaste a destino!", 200, 200);
     //  stop();
@@ -70,11 +73,14 @@ void draw () {
     //gano al pasar cierto tiempo sin perder
     background(0);
     mundo.remove(globo);
+    mundo.remove(a);
+    mundo.remove (lluvia);
+    mundo.remove(cajas);
     //aca iria el remove del obstaculo para que se borre ni bien sucede la colision
     text("¡Excelente! has superado los obstaculos y llegado a destino", 200, 200);
     // stop();
   }
-  
+
   if (tiempo >= 200) {
     a.inicializar();
     //agregarObstaculos( mundo, "R.jpg", "Avioneta" );
@@ -93,7 +99,7 @@ void draw () {
   //el primero indica el tiempo en millis y lo otro seria la frecuencia
   if (tiempo >= 640) {
     if ( frameCount % 300 == 0) {
-      cajas.inicializar();
+      //cajas.inicializar();
     }
   }
   if (tiempo >=1500) {
@@ -115,7 +121,6 @@ void draw () {
 }
 
 
-
 //COLISION
 void contactStarted( FContact colision ) {
   if ( hayColisionEntre( colision, "personaje", "obstaculo" ) ) {
@@ -124,6 +129,13 @@ void contactStarted( FContact colision ) {
     mundo.remove( uno );
     mundo.remove( dos );
   }
+  
+  if (resultado == true) {
+//  mundo.remove(a);
+//  mundo.remove(cajas);
+  mundo.remove(lluvia);
+}
+
 }
 boolean hayColisionEntre( FContact contact, String nombreUno, String nombreDos ) {
 

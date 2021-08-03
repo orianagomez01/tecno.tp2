@@ -30,12 +30,7 @@ class Cajas extends FBox {
     //poner foto del obstaculo de las cajas
     //bolita.attachImage();
   
-    if (resultado == true) {
-      mundo.remove(cajas);
-    }
-    if (estado==4) {
-      mundo.remove(cajas);
-    }
+    
   }
   }
   

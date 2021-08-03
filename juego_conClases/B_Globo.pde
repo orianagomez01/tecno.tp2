@@ -1,6 +1,6 @@
 class Globo extends FBox {
 
-  float xOriginal= 300;
+  float xOriginal = 300;
   //el _w y _h lo pide la libreria para colocar las posiciones del cuadrado con super
   Globo (float _w, float _h) {
     super(_w, _h);
@@ -17,20 +17,20 @@ class Globo extends FBox {
     setRotatable(false);
     //setStatic(true);
     setDensity(0);
-    
-    
+
+
 
     //es para agregar la imagen dentro del rect  
     //attachImage();
 
-  //  popMatrix();
+    //  popMatrix();
   }
-  
+
   //void applyForce (Globo force) {
   // float fy = -200;
-    
+
   // addForce (fy, getForceY());
-    
+
   //}
 
   //   void atraer (float x, float y) {
