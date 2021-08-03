@@ -7,6 +7,7 @@ Globo globo;
 Avioneta a;
 Lluvia lluvia;
 Cajas cajas;
+Fuego fuego;
 
 //-----------
 int tiempo =1;
@@ -15,6 +16,9 @@ boolean resultado;
 
 void setup () {
   size (1200, 600);
+  
+    smooth();
+
 
   //iniciar Fisica
   Fisica.init(this);
@@ -40,6 +44,9 @@ void setup () {
 
   cajas = new Cajas (60, 60);
   mundo.add (cajas);
+
+  fuego = new Fuego (120, 60);
+  mundo.add (fuego);
 }
 
 void draw () {
@@ -57,6 +64,18 @@ void draw () {
     //comienza el juego
     globo.inicializar();
     f.inicializar();
+     
+    float m = map (tiempo, 0, 1500, height/20, width/2-370); 
+    tiempo = tiempo +1;
+    noStroke();
+    rect (width/2+350, 20, m, height/24); 
+     
+    // fill(0);
+    //text ("Tiempo:", 10, 20);
+    //tiempo=tiempo+1;
+    //text(tiempo, 70, 20);
+    //noFill();
+    
   }
   if (estado==3) {
     //pierde por colision
@@ -110,12 +129,7 @@ void draw () {
   //  Globo wind = new Globo(0, -40);
   //  globo.applyForce(wind);
   //}
-
-  fill(0);
-  text ("Tiempo:", 10, 20);
-  tiempo=tiempo+1;
-  text(tiempo, 70, 20);
-  noFill();
+  
   mundo.step();
   mundo.draw(this);
 }
@@ -129,13 +143,12 @@ void contactStarted( FContact colision ) {
     mundo.remove( uno );
     mundo.remove( dos );
   }
-  
-  if (resultado == true) {
-//  mundo.remove(a);
-//  mundo.remove(cajas);
-  mundo.remove(lluvia);
-}
 
+  if (resultado == true) {
+    //  mundo.remove(a);
+    //  mundo.remove(cajas);
+    mundo.remove(lluvia);
+  }
 }
 boolean hayColisionEntre( FContact contact, String nombreUno, String nombreDos ) {
 
@@ -163,6 +176,7 @@ boolean hayColisionEntre( FContact contact, String nombreUno, String nombreDos )
 void contactLluvia( FContact colision ) {
   if ( hayColisionEntre( colision, "personaje", "lluvia" ) ) {
     resultado = false;
+    
   }
 }
 void contactCajas( FContact colision ) {

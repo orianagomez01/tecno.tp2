@@ -5,7 +5,7 @@ class Lluvia extends FCircle {
   }
 
   void inicializarLluvia () {
-    int ballCount = 15;
+    int ballCount = 55;
     float bv= 800;
 
     for (int i=0; i<ballCount; i++) {

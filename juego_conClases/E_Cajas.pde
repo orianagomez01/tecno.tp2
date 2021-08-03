@@ -16,7 +16,7 @@ class Cajas extends FBox {
     setFill(255, 0, 0);
     //acomodar posicion de random cuando se coloque en el juego
     setPosition(random(width), -2);
-    setDensity(1000);
+    setDensity(2000);
     addForce(500, cf);
     setVelocity(cajas.getVelocityX(), cv);
     setName("Cajas");
