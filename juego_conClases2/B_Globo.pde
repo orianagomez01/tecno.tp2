@@ -1,29 +1,48 @@
 class Globo extends FBox {
+  int fpx, fpy, tecla;
 
-  float xOriginal = 300;
   //el _w y _h lo pide la libreria para colocar las posiciones del cuadrado con super
   Globo (float _w, float _h) {
     super(_w, _h);
+
+    fpx = width/2-300;
+    fpy = height/2;
   }
 
   //inicializamos como comienza el personaje en el juego
   void inicializar()
   {
     setName("personaje");
-    setPosition( xOriginal, mouseY );
+    setPosition( fpx, fpy );
     //setDamping(0);
     //setRestitution(0);
     setFriction(1);
     setRotatable(false);
-   // setStatic(false);
+    // setStatic(false);
     setGrabbable (false);
-   // setDensity(0.1);
+    // setDensity(0.1);
+
+if (fpx>width) {
+      fpx= 0;
+    } else if (fpx<0) {
+      fpx= width;
+    }
 
     //es para agregar la imagen dentro del rect  
     //attachImage();
 
     //  popMatrix();
   }
+
+  void moverPersonaje(int tecla) {
+    if (tecla==DOWN) {
+      fpy += 20;
+    }
+    if (tecla==UP) {
+      fpy -= 20;
+    }
+  }
+
 
   //void applyForce (Globo force) {
   // float fy = -200;
