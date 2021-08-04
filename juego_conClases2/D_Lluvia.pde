@@ -1,6 +1,8 @@
 class Lluvia extends FCircle {
   int ballCount = 5;
   float bv= 400;
+  
+  float bpy = -2;
   Lluvia (float x_) {
     super (x_);
   }
@@ -13,7 +15,7 @@ class Lluvia extends FCircle {
     bolita.setNoStroke();
     bolita.setFill(0, 0, 255);
     //acomodar posicion de random cuando se coloque en el juego
-    bolita.setPosition(random(width), -2);
+    bolita.setPosition(random(width), bpy);
     bolita.setDensity(1000);
     bolita.addForce(500, -1000);
     bolita.setVelocity(bolita.getVelocityX(), bv);
@@ -30,5 +32,11 @@ class Lluvia extends FCircle {
       mundo.remove(bolita);
     }
   }
+  
+  if (bpy>width) {
+      bpy= 0;
+    } else if (bpy<0) {
+      bpy= width;
+    }
   }
 }

@@ -55,7 +55,7 @@ void setup () {
   cajas = new Cajas (60, 60);
   //  mundo.add (cajas);
 
-  globo= new Globo (90, 200);
+  globo= new Globo (90, 100);
   mundo.add(globo);
 
   rafaga = new Rafaga (50, 50);
